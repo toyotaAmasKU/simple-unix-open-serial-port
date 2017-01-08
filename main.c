@@ -20,7 +20,7 @@ int open_serial_port(const char *dev)
     return file_description;
 }
 
-int set_port_attribute(int file_description, int baud_rate)
+int set_port_attribute(int file_description, const int baud_rate)
 {
     struct termios options;
 
@@ -135,11 +135,11 @@ int main(int argc, char *argv[])
 
     const char *dev = argv[1];
     const char *baud_rate_string = argv[2];
+    const int baud_rate = atoi(baud_rate_string);
 
-    int file_description, baud_rate;
+    int file_description;
 
     file_description = open_serial_port(dev);
-    baud_rate = atoi(baud_rate_string);
 
     if(file_description == -1)
     {
